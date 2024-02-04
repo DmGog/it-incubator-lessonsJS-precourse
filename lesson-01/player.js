@@ -82,8 +82,12 @@ renderHeader(anyPlayList.playListInfo)
         const trackElement = document.createElement('li')
         const trackCoverElement = document.createElement('Img')
         trackCoverElement.src = anyTrack.trackCoverImgUrl
+        const audio = document.createElement('audio')
+        audio.src = anyTrack.trackFileUrl
+        audio.controls = true
         trackElement.append(trackCoverElement)
         trackElement.append(anyTrack.artistName + ': ' + anyTrack.trackTitle)
+        trackElement.append(audio)
         return trackElement
     }
 }
