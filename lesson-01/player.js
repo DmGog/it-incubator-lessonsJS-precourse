@@ -56,27 +56,35 @@ const playList = {
 
 // создаем функцию для отрисовки любого (any ) плейлиста
 function renderPlayList (anyPlayList){
-    const playListTitleElement = document.createElement('h1')
-    playListTitleElement.append(anyPlayList.playListInfo.title)
-    document.body.append(playListTitleElement)
-    const playListCoverElement = document.createElement('Img')
-    playListCoverElement.src = anyPlayList.playListInfo.coverImgUrl
-// можно изменить размер картинки
-// playListCoverElement.style.width = '250px'
-// playListCoverElement.style.height = '250px'
-    document.body.append(playListCoverElement)
+    // функция отрисовки кода
+renderHeader(anyPlayList.playListInfo)
 
     //список треков
 
     const tracksListElement = document.createElement('ul')
     for (let i = 0; i < anyPlayList.tracks.length; i++) {
-        const trackElement = document.createElement('li')
-        const trackCoverElement = document.createElement('Img')
-        trackCoverElement.src = anyPlayList.tracks[i].trackCoverImgUrl
-        trackElement.append(trackCoverElement)
-        trackElement.append(anyPlayList.tracks[i].artistName + ': ' + anyPlayList.tracks[i].trackTitle)
+        const trackElement = createTrack(anyPlayList.tracks[i])
         tracksListElement.append(trackElement)
     }
     document.body.append(tracksListElement)
+
+    // создаем функцию отрисовки (упрощаем код)
+    function renderHeader(anyPlayListInfo){
+        const playListTitleElement = document.createElement('h1')
+        playListTitleElement.append(anyPlayList.playListInfo.title)
+        document.body.append(playListTitleElement)
+        const playListCoverElement = document.createElement('Img')
+        playListCoverElement.src = anyPlayListInfo.coverImgUrl
+        document.body.append(playListCoverElement)
+    }
+    // список треков функция
+    function createTrack(anyTrack){
+        const trackElement = document.createElement('li')
+        const trackCoverElement = document.createElement('Img')
+        trackCoverElement.src = anyTrack.trackCoverImgUrl
+        trackElement.append(trackCoverElement)
+        trackElement.append(anyTrack.artistName + ': ' + anyTrack.trackTitle)
+        return trackElement
+    }
 }
 renderPlayList(playList)
